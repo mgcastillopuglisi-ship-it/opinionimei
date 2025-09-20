@@ -227,10 +227,11 @@
   <div id="toast" class="toast" role="status" aria-live="polite"><span class="dot"></span> ¡Gracias! Te llevamos a dejar tu valoración…</div>
 
   <script>
+
     /* ===== CONFIG ===== */
-    const POSITIVE_URL = "https://www.google.com/search?sca_esv=07c1394e5d835a50&tbm=lcl&sxsrf=AE3TifPvlVupwVFCICsynUiR_qV2z1yWaA:1757771313614&q=Cl%C3%ADnica+est%C3%A9tica+IM%C3%A8I+Barcelona+Rese%C3%B1as&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNLcwMzMwMjG1tDA3MzM2MDIzNdzAyPiKUds55_DavMzkRIXU4pLDK0tALE_fwys8FZwSi5JTc_LzEhWCUotTD29MLF7ESopqAD7ook93AAAA&rldimm=17866024598766302651&hl=es-ES&sa=X&ved=2ahUKEwj_gPq18NWPAxW4VqQEHWQsMOYQ9fQKegQINRAF&biw=1280&bih=631&dpr=1.5#lkt=LocalPoiReviews&lrd=0x12a4a315f1e3cbd7:0xf7f0deb6dddb35bb,3,,,,";
-    const NEGATIVE_URL = "https://tally.so/r/wbaAY6"; /* enlace para Muy mala / Mala / Regular */
-    const WEBHOOK_URL  = "https://hook.eu2.make.com/g29906yoah4ubjbft73k8kcvq22nntyx"; // Make / n8n / Apps Script / Airtable
+const POSITIVE_URL = "https://www.google.com/search?sca_esv=07c1394e5d835a50&tbm=lcl&sxsrf=AE3TifPvlVupwVFCICsynUiR_qV2z1yWaA:1757771313614&q=Cl%C3%ADnica+est%C3%A9tica+IM%C3%A8I+Barcelona+Rese%C3%B1as&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNLcwMzMwMjG1tDA3MzM2MDIzNdzAyPiKUds55_DavMzkRIXU4pLDK0tALE_fwys8FZwSi5JTc_LzEhWCUotTD29MLF7ESopqAD7ook93AAAA&rldimm=17866024598766302651&hl=es-ES&sa=X&ved=2ahUKEwj_gPq18NWPAxW4VqQEHWQsMOYQ9fQKegQINRAF&biw=1280&bih=631&dpr=1.5#lkt=LocalPoiReviews&lrd=0x12a4a315f1e3cbd7:0xf7f0deb6dddb35bb,3,,,,";      // ya la tenías bien
+const NEGATIVE_URL = "https://tally.so/r/wbaAY6";      // ok
+const WEBHOOK_URL  = "https://hook.eu2.make.com/g29906yoah4ubjbft73k8kcvq22nntx"; // ← sin repetir "https://"
 
     /* Texto/versión del consentimiento para registrar exactamente lo aceptado (newsletter) */
     const CONSENT_TEXT = "Acepto recibir la newsletter con novedades y beneficios. Puedo darme de baja cuando quiera.";
