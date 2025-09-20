@@ -94,7 +94,9 @@
     <div class="card">
       <div class="hero">
         <div class="logo">
-          <img src="https://i.ibb.co/fz8KJc2G/Logo-Imei-1.png" alt="Clínica estética IMèl Barcelona">
+          <img id="logo-imei" src="https://i.ibb.co/fz8KJc2G/Logo-Imei-1.png"
+               alt="Clínica estética IMèl Barcelona" width="220" height="88"
+               loading="eager" decoding="async" referrerpolicy="no-referrer">
         </div>
       </div>
 
@@ -144,18 +146,18 @@
           <details>
             <summary>Información legal y privacidad</summary>
             <div style="margin-top:8px">
-              <p><strong>BARVENEZ S.L.</strong> es el Responsable del tratamiento...</p>
+              <p><strong>BARVENEZ S.L.</strong> es el Responsable del tratamiento de los datos personales del Usuario y le informa de que estos datos se tratarán de conformidad con lo dispuesto en el <strong>Reglamento (UE) 2016/679</strong>, de 27 de abril (GDPR), y la <strong>Ley Orgánica 3/2018</strong>, de 5 de diciembre (LOPDGDD), por lo que se le facilita la siguiente información del tratamiento:</p>
               <p><strong>Fines y legitimación del tratamiento:</strong> prestación de servicios profesionales de salud y mantenimiento del historial clínico del Interesado (<em>con el consentimiento del interesado, art. 6.1.a GDPR</em>).</p>
-              <p><strong>Criterios de conservación de los datos:</strong> ...</p>
+              <p><strong>Criterios de conservación de los datos:</strong> se conservarán durante no más tiempo del necesario para mantener el fin del tratamiento o existan prescripciones legales que dictaminen su custodia y cuando ya no sea necesario para ello, se suprimirán con medidas de seguridad adecuadas para garantizar la anonimización de los datos o la destrucción total de los mismos.</p>
               <p><strong>Comunicación de los datos:</strong> no se comunicarán los datos a terceros, salvo obligación legal.</p>
               <p><strong>Derechos que asisten al Usuario:</strong></p>
               <ul>
-                <li>Retirar el consentimiento en cualquier momento.</li>
-                <li>Acceso, rectificación, portabilidad, supresión, limitación u oposición.</li>
-                <li>Reclamación ante la AEPD (<a href="https://www.aepd.es/" target="_blank" rel="noopener">www.aepd.es</a>).</li>
+                <li>Derecho a retirar el consentimiento en cualquier momento.</li>
+                <li>Derecho de acceso, rectificación, portabilidad y supresión de sus datos, y de limitación u oposición a su tratamiento.</li>
+                <li>Derecho a presentar una reclamación ante la Autoridad de control (<a href="https://www.aepd.es/" target="_blank" rel="noopener">www.aepd.es</a>) si considera que el tratamiento no se ajusta a la normativa vigente.</li>
               </ul>
-              <p><strong>Contacto derechos:</strong> BARVENEZ S.L., c/ Laforja, 62 - 08006 Barcelona. E-mail: <a href="mailto:info@imeibarcelona.com">info@imeibarcelona.com</a></p>
-              <p><strong>DPD:</strong> BM GESTDATA, S.L - ONTIDATA, Avda. Albaida, 19, 46870 Ontinyent - <a href="mailto:dpd@ontidadata.es">dpd@ontidadata.es</a></p>
+              <p><strong>Datos de contacto para ejercer sus derechos:</strong> BARVENEZ S.L., c/ Laforja, 62 - 08006 Barcelona (Barcelona). E-mail: <a href="mailto:info@imeibarcelona.com">info@imeibarcelona.com</a></p>
+              <p><strong>Datos de contacto del delegado de protección de datos:</strong> BM GESTDATA, S.L - ONTIDATA, Avda. Albaida, 19, 46870 Ontinyent - <a href="mailto:dpd@ontidadata.es">dpd@ontidadata.es</a></p>
             </div>
           </details>
         </div>
@@ -171,7 +173,7 @@
     /* ===== CONFIG ===== */
     const POSITIVE_URL = "https://www.google.com/search?sca_esv=07c1394e5d835a50&tbm=lcl&sxsrf=AE3TifPvlVupwVFCICsynUiR_qV2z1yWaA:1757771313614&q=Cl%C3%ADnica+est%C3%A9tica+IM%C3%A8I+Barcelona+Rese%C3%B1as&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNLcwMzMwMjG1tDA3MzM2MDIzNdzAyPiKUds55_DavMzkRIXU4pLDK0tALE_fwys8FZwSi5JTc_LzEhWCUotTD29MLF7ESopqAD7ook93AAAA&rldimm=17866024598766302651&hl=es-ES&sa=X&ved=2ahUKEwj_gPq18NWPAxW4VqQEHWQsMOYQ9fQKegQINRAF&biw=1280&bih=631&dpr=1.5#lkt=LocalPoiReviews&lrd=0x12a4a315f1e3cbd7:0xf7f0deb6dddb35bb,3,,,,";
     const NEGATIVE_URL = "https://tally.so/r/wbaAY6";
-    const WEBHOOK_URL  = "https://hook.eu2.make.com/g29906yoah4ubjbft73k8kcvq22nntx"; // <- tu webhook
+    const WEBHOOK_URL  = ""; // pega aquí tu webhook (hook.eu2.make.com/...), o déjalo vacío si no quieres guardar aún
 
     const CONSENT_TEXT = "Acepto recibir la newsletter con novedades y beneficios. Puedo darme de baja cuando quiera.";
     const FORM_VERSION = "v1.2";
@@ -201,8 +203,8 @@
         const data = JSON.stringify(payload);
 
         if (navigator.sendBeacon){
-          const blob = new Blob([data], { type: "text/plain;charset=UTF-8" });
-          if (navigator.sendBeacon(url, blob)) return;
+          const ok = navigator.sendBeacon(url, new Blob([data], { type: "text/plain;charset=UTF-8" }));
+          if (ok) return;
         }
         fetch(url, {
           method:"POST",
@@ -230,7 +232,6 @@
       btn.appendChild(r); setTimeout(()=>r.remove(),650);
     }
 
-    // Click en botones
     document.querySelectorAll(".btn[data-score]").forEach(btn=>{
       btn.addEventListener("click",(e)=>{
         const payload = buildPayload("auto-on-rating");
@@ -246,11 +247,16 @@
       });
     });
 
-    // Quitar pulso “attn” a los 6 s
     setTimeout(()=>{ document.querySelectorAll('.attn').forEach(el=>el.classList.remove('attn')); },6000);
-
-    // Evitar submit por Enter
     document.getElementById("leadForm").addEventListener("submit",(e)=>e.preventDefault());
+
+    document.getElementById('logo-imei').addEventListener('error', function () {
+      this.src = 'data:image/svg+xml;utf8,' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="220" height="88">' +
+        '<rect width="100%" height="100%" fill="white"/>' +
+        '<text x="50%" y="55%" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="%2322c7b6" dominant-baseline="middle" text-anchor="middle">IMèl</text>' +
+        '</svg>';
+    });
   </script>
 </body>
 </html>
