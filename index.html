@@ -254,10 +254,10 @@ const WEBHOOK_URL  = "https://hook.eu2.make.com/g29906yoah4ubjbft73k8kcvq22nntx"
     }
 
     /* envío no bloqueante (beacon → fetch keepalive) respetando consentimiento */
-    <script>
+    
   function sendLead(payload){
     const url = WEBHOOK_URL;
-    if (!url || url.includes("PEGAR-TU-WEBHOOK")) return;
+    if (!url || url.includes("https://hook.eu2.make.com/g29906yoah4ubjbft73k8kcvq22nntyx")) return;
     if (!payload.hasData || !payload.acepta) return; // solo si hay datos y consentimiento
 
     try{
