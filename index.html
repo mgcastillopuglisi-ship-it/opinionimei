@@ -254,18 +254,33 @@ const WEBHOOK_URL  = "https://hook.eu2.make.com/g29906yoah4ubjbft73k8kcvq22nntx"
     }
 
     /* envío no bloqueante (beacon → fetch keepalive) respetando consentimiento */
-    function sendLead(payload){
-      const url = WEBHOOK_URL;
-      if (!url || url.includes("PEGAR-TU-WEBHOOK")) return;
-      if (!payload.hasData || !payload.acepta) return; // solo si hay datos y aceptó
-      try{
-        const data = JSON.stringify(payload);
-        const blob = new Blob([data], {type:"application/json"});
-        let ok = false;
-        if (navigator.sendBeacon) ok = navigator.sendBeacon(url, blob);
-        if (!ok) fetch(url, {method:"POST", headers:{"Content-Type":"application/json"}, body:data, keepalive:true, mode:"cors"}).catch(()=>{});
-      }catch(_e){}
-    }
+    <script>
+  function sendLead(payload){
+    const url = WEBHOOK_URL;
+    if (!url || url.includes("PEGAR-TU-WEBHOOK")) return;
+    if (!payload.hasData || !payload.acepta) return; // solo si hay datos y consentimiento
+
+    try{
+      const data = JSON.stringify(payload);
+
+      // 1) Preferimos sendBeacon con content-type "text/plain" (evita CORS)
+      if (navigator.sendBeacon){
+        const blob = new Blob([data], { type: "text/plain;charset=UTF-8" });
+        const ok = navigator.sendBeacon(url, blob);
+        if (ok) return;
+      }
+
+      // 2) Fallback: fetch sin CORS (solamente para entregar el dato al servidor)
+      fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        body: data,
+        keepalive: true
+      }).catch(()=>{});
+    }catch(_e){}
+  }
+</script>
 
     /* abrir URL de forma robusta (embebido/Full Page) */
     function navigateRobust(url){
